@@ -1,4 +1,4 @@
-##insertion sort
+## insertion sort
 ```cpp
 #include<stdio.h>
 
