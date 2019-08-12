@@ -43,3 +43,78 @@ int main(){
   return 0;
 }
 ```
+
+# Merge Sort
+```cpp
+#include<stdio.h>
+#include<limits.h>
+
+void printArray(int arr[],int length){
+  for(int i=0;i<length;i++){
+    printf("%d ",arr[i]);
+  }
+  printf("\n");
+}
+
+void merge(int *a,int left,int mid, int right){
+  
+  int n1= mid-left+1;
+  int n2= right-mid;
+
+  //array declaration
+  int L[n1+1];
+  int R[n2+1];
+  
+  //copying arrays
+  for(int i=0;i<n1;i++)
+    L[i]=a[left+i];
+  for(int j=0;j<n2;j++)
+    R[j]=a[mid+1+j];
+
+  L[n1+1] = INT_MAX;
+  R[n2+1] = INT_MAX;
+
+
+  int i=0,j=0;
+  for(int k=left;k<=right;k++){
+    if(L[i]<=R[j]){
+      a[k]=L[i];
+      i++;
+    }else{
+      a[k]=R[j];
+      j++;
+    }
+  }
+
+  
+
+}
+
+void mergeSort(int *a,int left,int right){
+  if(left<right){
+    int mid = (left+right)/2;
+    mergeSort(a, left,mid);
+    mergeSort(a,mid+1,right);
+    merge(a,left,mid,right);
+  }
+  
+
+}
+
+int main(){
+  int a[] = {10,9,8,7,6,5,4,3,2,1};
+  
+  int length = sizeof(a)/sizeof(a[0]);
+  
+
+  printf("Before Merging:");
+  printArray(a, length);
+  mergeSort(a,0,length-1);
+  printf("After Merging :");
+  printArray(a,length);
+  
+  
+
+  return 1;
+}
+```
