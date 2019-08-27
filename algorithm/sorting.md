@@ -118,3 +118,60 @@ int main(){
   return 1;
 }
 ```
+
+# Quick Sort
+```cpp
+#include<stdio.h>
+
+
+void printArray(int arr[],int length){
+  for(int i=0;i<length;i++){
+    printf("%d ",arr[i]);
+  }
+  printf("\n");
+}
+void swap(int *a,int i,int j){
+  int temp = a[i];
+  a[i]=a[j];
+  a[j]=temp;
+}
+
+int partition(int *a,int left,int right){
+  int pivot = a[right];
+  int i = left-1;             //keep track of less than pivot
+
+  for(int j=left;j<right;j++){
+    if(a[j]<=pivot){
+      i=i+1;
+      swap(a,i,j);
+    }
+  }
+  //swap pivot
+  swap(a,i+1,right);
+  return i+1;
+}
+
+void quickSort(int *a,int left,int right){
+  if(left<right){
+    int q = partition(a,left,right);
+    quickSort(a,left,q-1);
+    quickSort(a,q+1,right);
+  }
+}
+
+
+int main(){
+  int a[] = {13,19,9,5,12,8,7,4,21,2,6,11};
+  
+  int length = sizeof(a)/sizeof(a[0]);
+  
+  printf("Before  Sorting :");
+  printArray(a,length);
+  
+  quickSort(a,0,length-1);
+
+  printf("After   Sorting :");
+  printArray(a,length);
+  return 1;
+}
+```
