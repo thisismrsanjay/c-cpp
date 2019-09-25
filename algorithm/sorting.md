@@ -175,3 +175,73 @@ int main(){
   return 1;
 }
 ```
+#heap sort
+```cpp
+#include <stdio.h>
+
+void swap(int *a,int i,int j){
+  int temp = a[i];
+  a[i]=a[j];
+  a[j]=temp;
+}
+void printArray(int arr[],int length){
+  for(int i=0;i<length;i++){
+    printf("%d ",arr[i]);
+  }
+  printf("\n");
+}
+void max_heapify(int *a,int i,int length){
+    int left = 2*i+1;
+    int right= 2*i+2; 
+    int largest;
+    if(left<length && a[left]>a[i])
+        largest=left;
+    else largest=i;
+    
+    if(right<length && a[right]>a[largest])
+        largest=right;
+        
+    if(largest!=i){
+        swap(a,i,largest);
+        max_heapify(a,largest,length);
+    }
+}
+void build_max_heap(int *a,int length){
+    
+    for(int i=(length)/2-1;i>=0;i--){
+        max_heapify(a,i,length); 
+        printf("intermidiate   :");
+        printArray(a,length);
+    }
+    
+}
+int heap_extract_max(int *a,int length){
+    
+    int max = a[0];
+    a[0]=a[length-1];
+    max_heapify(a,0,length);
+    return max;
+}
+int main()
+{
+    int a[] ={4,9,6,5,0,8,2,1,3,7};
+    int length = sizeof(a)/sizeof(a[0]);
+    
+    
+    int i=0;
+    printf("Before  Heapify:");
+    printArray(a,length);
+    
+    build_max_heap(a,length);
+    
+    printf("After  Heapify :");
+    printArray(a,length);
+    
+    printf("Sorting Heapify:");
+    for(int i =0 ;i<length;i++){
+        printf("%d ",heap_extract_max(a,length-i));
+    }
+    return 0;
+}
+
+```
